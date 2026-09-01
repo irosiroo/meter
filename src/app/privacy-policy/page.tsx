@@ -34,21 +34,17 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-lg font-semibold text-fg">Cookies and Advertising</h2>
           <p className="mt-2">
-            This site uses Google AdSense to display advertisements. Google and its partners may
+            This site display advertisements. my partners may
             use cookies to serve ads based on your prior visits to this or other websites. You can
-            opt out of personalized advertising by visiting{" "}
-            <a href="https://www.google.com/settings/ads" className="underline">
-              Google Ads Settings
-            </a>
-            .
+            opt out of personalized advertising by visiting{" "} .
           </p>
         </section>
 
         <section>
           <h2 className="text-lg font-semibold text-fg">Third-Party Vendors</h2>
           <p className="mt-2">
-            Third-party vendors, including Google, use cookies to serve ads based on a
-            user&apos;s prior visits to this website or other websites. Google&apos;s use of
+            Third-party vendors,use cookies to serve ads based on a
+            user&apos;s prior visits to this website or other websites. use of
             advertising cookies enables it and its partners to serve ads based on your visit to
             this site and/or other sites on the Internet.
           </p>
