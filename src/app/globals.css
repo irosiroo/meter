@@ -1,0 +1,473 @@
+/* ============================================================================
+   METER – Tools Panel · Design System
+   Tailwind CSS v4 theme + primitives. Everything here is original:
+   an "electric blueprint" aesthetic — deep electric blue, cyan telemetry,
+   violet/emerald accents, glass panels on a soft measured grid.
+   ========================================================================== */
+
+@import "tailwindcss";
+
+/* Class-based dark mode (we control the class from ThemeProvider). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------- tokens */
+@theme {
+  /* Brand — Deep Electric Blue */
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe6fe;
+  --color-brand-200: #bfd3fe;
+  --color-brand-300: #93b4fd;
+  --color-brand-400: #608ffa;
+  --color-brand-500: #3b6df6;
+  --color-brand-600: #2450eb;
+  --color-brand-700: #1b3dd8;
+  --color-brand-800: #1c35af;
+  --color-brand-900: #1d318a;
+  --color-brand-950: #152054;
+
+  /* Secondary — Cyan telemetry */
+  --color-flux-300: #6ee7f9;
+  --color-flux-400: #22d3ee;
+  --color-flux-500: #06b6d4;
+  --color-flux-600: #0891b2;
+
+  /* Secondary — Indigo */
+  --color-indigo-ink: #4f46e5;
+
+  /* Accents */
+  --color-violet-accent: #8b5cf6;
+  --color-emerald-accent: #10b981;
+
+  /* Neutrals — navy-tinted ink scale */
+  --color-ink-50: #f7f8fc;
+  --color-ink-100: #eef0f7;
+  --color-ink-200: #dde1ee;
+  --color-ink-300: #bcc3da;
+  --color-ink-400: #949dbd;
+  --color-ink-500: #6f7a9e;
+  --color-ink-600: #556084;
+  --color-ink-700: #434c6b;
+  --color-ink-800: #2b3247;
+  --color-ink-900: #191e2e;
+  --color-ink-950: #0a0e1a;
+
+  /* Typography — system stack: zero network cost, instant first paint */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", "Cascadia Mono",
+    Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Radii — large, Apple-ish */
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.75rem;
+
+  /* Easing */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* Animations */
+  --animate-float-slow: float-slow 22s var(--ease-out-quint) infinite;
+  --animate-float-slower: float-slow 34s var(--ease-out-quint) infinite reverse;
+  --animate-sheen: sheen 2.4s var(--ease-out-quint) infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.6s var(--ease-out-quint) infinite;
+  --animate-fade-up: fade-up 0.5s var(--ease-out-quint) both;
+  --animate-caret: caret 1.1s steps(2, start) infinite;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2.5rem, -2rem, 0) scale(1.08);
+  }
+}
+@keyframes sheen {
+  0% {
+    transform: translateX(-120%);
+  }
+  60%,
+  100% {
+    transform: translateX(220%);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-brand-500) 45%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 0.75rem transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.75rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------ semantic surface layer */
+:root {
+  color-scheme: light;
+  --canvas: #f2f5fb;
+  --canvas-deep: #e8ecf6;
+  --surface: 255 255 255;
+  --surface-alpha: 0.72;
+  --surface-solid: #ffffff;
+  --surface-sunken: #eef1f8;
+  --line: 15 23 42;
+  --line-alpha: 0.09;
+  --fg: #141a2b;
+  --fg-muted: #566084;
+  --fg-subtle: #7b85a6;
+  --shadow-color: 22 34 64;
+  --grid-line: rgb(36 80 235 / 0.055);
+  --display-bg: linear-gradient(165deg, #0b1226 0%, #101a35 55%, #0a1122 100%);
+}
+
+.dark {
+  color-scheme: dark;
+  --canvas: #070b16;
+  --canvas-deep: #04060e;
+  --surface: 148 175 255;
+  --surface-alpha: 0.05;
+  --surface-solid: #0e1425;
+  --surface-sunken: #0a0f1e;
+  --line: 174 197 255;
+  --line-alpha: 0.12;
+  --fg: #eaeefb;
+  --fg-muted: #9aa5c6;
+  --fg-subtle: #6f7a9e;
+  --shadow-color: 0 0 0;
+  --grid-line: rgb(120 160 255 / 0.05);
+  --display-bg: linear-gradient(165deg, #05080f 0%, #0a1024 55%, #04060d 100%);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-surface: var(--surface-solid);
+  --color-sunken: var(--surface-sunken);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+}
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  * {
+    border-color: rgb(var(--line) / var(--line-alpha));
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    font-variant-ligatures: contextual;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand-500) 26%, transparent);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 0.35rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Numeric surfaces read as instrumentation, never as prose. */
+  .tnum,
+  input[type="number"],
+  output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--line) / 0.22);
+    border-radius: 99px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--line) / 0.35);
+    background-clip: content-box;
+  }
+}
+
+/* ------------------------------------------------------------ primitives */
+@layer components {
+  /* Glass panel — the core surface of the product. */
+  .glass {
+    background: rgb(var(--surface) / var(--surface-alpha));
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgb(var(--line) / var(--line-alpha));
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.6) inset,
+      0 18px 40px -24px rgb(var(--shadow-color) / 0.28);
+  }
+  .dark .glass {
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.06) inset,
+      0 22px 50px -28px rgb(0 0 0 / 0.8);
+  }
+
+  .glass-strong {
+    background: rgb(var(--surface) / calc(var(--surface-alpha) + 0.16));
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+    border: 1px solid rgb(var(--line) / calc(var(--line-alpha) + 0.04));
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.7) inset,
+      0 30px 60px -30px rgb(var(--shadow-color) / 0.3);
+  }
+  .dark .glass-strong {
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.07) inset,
+      0 30px 70px -30px rgb(0 0 0 / 0.9);
+  }
+
+  /* Hairline separator that survives both themes. */
+  .hairline {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--line) / calc(var(--line-alpha) + 0.08)) 18%,
+      rgb(var(--line) / calc(var(--line-alpha) + 0.08)) 82%,
+      transparent
+    );
+    height: 1px;
+  }
+
+  /* Measured blueprint grid — the "meter" motif. */
+  .blueprint {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 78%);
+  }
+
+  /* Animated conic border for featured/active cards. */
+  .ring-conic {
+    position: relative;
+    isolation: isolate;
+  }
+  .ring-conic::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--conic-angle, 0deg),
+      transparent 0deg,
+      var(--color-brand-500) 70deg,
+      var(--color-flux-400) 130deg,
+      transparent 200deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-out-quint);
+    z-index: -1;
+  }
+  .ring-conic:hover::before,
+  .ring-conic:focus-within::before,
+  .ring-conic[data-active="true"]::before {
+    opacity: 1;
+    animation: conic-spin 4.5s linear infinite;
+  }
+
+  /* Calculator display — deep instrument panel in both themes. */
+  .instrument {
+    background: var(--display-bg);
+    border: 1px solid rgb(120 160 255 / 0.16);
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.07) inset,
+      0 0 0 1px rgb(36 80 235 / 0.1),
+      0 26px 60px -34px rgb(12 22 52 / 0.75);
+  }
+
+  /* Key with tactile press feedback (no JS needed for the physical part). */
+  .key {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition:
+      transform 0.12s var(--ease-spring),
+      background-color 0.18s ease,
+      color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  .key:active {
+    transform: scale(0.94);
+  }
+  .key::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at center, rgb(255 255 255 / 0.5), transparent 62%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .key[data-flash="true"]::after {
+    opacity: 1;
+    transition: none;
+  }
+
+  /* Marker text used for search highlighting. */
+  .mark-hit {
+    background: color-mix(in oklab, var(--color-brand-500) 20%, transparent);
+    color: inherit;
+    border-radius: 0.25rem;
+    padding: 0 0.12em;
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-brand-500) 22%, transparent);
+  }
+
+  /* Skeleton shimmer for lazy panels. */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--surface) / 0.35),
+      transparent
+    );
+    animation: var(--animate-sheen);
+  }
+
+  /* Text gradient used sparingly on hero words. */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-brand-600),
+      var(--color-flux-500) 45%,
+      var(--color-violet-accent)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .dark .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-brand-300),
+      var(--color-flux-300) 45%,
+      #c4b5fd
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes conic-spin {
+  to {
+    --conic-angle: 360deg;
+  }
+}
+
+@property --conic-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* --------------------------------------------------------- a11y / motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "meter-tools-panel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "METER – Tools Panel. 309 intelligent calculators and professional tools in one powerful platform.",
+  "scripts": {
+    "dev": "next dev",
+    "gen": "tsx scripts/gen-index.ts",
+    "verify": "tsx scripts/verify.ts",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "npm run gen && npm run verify",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "check": "npm run gen && npm run verify && npm run typecheck"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.6",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.4.7",
+    "lucide-react": "^0.475.0",
+    "next": "16.3.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tailwind-merge": "^3.0.2",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.3",
+    "tailwindcss": "^4",
+    "tsx": "^4.19.3",
+    "typescript": "^5"
+  }
+}
