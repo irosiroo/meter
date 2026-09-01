@@ -15,6 +15,11 @@ const EXPLORE = [
   { href: "/history", label: "History" },
 ];
 
+const LEGAL = [
+  { href: "/about", label: "About" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+];
+
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -58,10 +63,17 @@ export function Footer() {
       </div>
 
       <div className="border-t border-[rgb(var(--line)/0.06)]">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-fg-subtle sm:flex-row sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-sm text-fg-subtle sm:flex-row sm:px-6 lg:px-8">
           <p>
             © {year} {SITE.name}. {SITE.subtitle}.
           </p>
+          <div className="flex gap-4">
+            {LEGAL.map((l) => (
+              <Link key={l.href} href={l.href} className="transition-colors hover:text-fg">
+                {l.label}
+              </Link>
+            ))}
+          </div>
           <p>Measure. Calculate. Solve.</p>
         </div>
       </div>
