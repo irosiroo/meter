@@ -73,6 +73,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   src="https://pl31139608.profitableratecpmnetwork.com/54/a1/85/54a1859f85264dc8a5b1c59424c59681.js"
   strategy="afterInteractive"
 />
+<Script
+    src="https://pl31139609.profitableratecpmnetwork.com/20/8f/ef/208fefe2649cc1ee1ccd4bb07789424c.js"
+    strategy="afterInteractive"
+  />
       </head>
       <body>
         <Providers>
