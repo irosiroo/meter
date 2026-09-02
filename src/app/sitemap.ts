@@ -1,26 +1,30 @@
-import type { MetadataRoute } from "next";
+export default async function sitemap() {
+  const baseUrl = 'https://meteria.vercel.app';
 
-import { ALL_SPECS } from "@/data/calculators";
-import { CATEGORY_IDS } from "@/data/categories";
-import { SITE } from "@/lib/utils";
-
-export const dynamic = "force-static";
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = SITE.url;
-
-  const entries: MetadataRoute.Sitemap = [
-    { url: `${base}/`, changeFrequency: "weekly", priority: 1 },
-    { url: `${base}/all-tools`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/categories`, changeFrequency: "weekly", priority: 0.7 },
+  // قائمة الكلمات البحثية المستهدفة (يمكنك جلبها من قاعدة بيانات أو مصفوفة ضخمة)
+  const targetQueries = [
+    'نسبة-الارباح-السنوية',
+    'حساب-قسط-السيارة',
+    'حساب-الزكاة-الشرعية',
+    'النسبة-المئوية-للراتب',
+    // أضف هنا آلاف الكلمات أو اربطها بقائمة الحاسبات الـ 309 الخاصة بك
   ];
 
-  for (const id of CATEGORY_IDS) {
-    entries.push({ url: `${base}/categories/${id}`, changeFrequency: "monthly", priority: 0.6 });
-  }
-  for (const spec of ALL_SPECS) {
-    entries.push({ url: `${base}/calculator/${spec.id}`, changeFrequency: "monthly", priority: 0.7 });
-  }
+  // توليد رابط لكل كلمة بحثية
+  const dynamicUrls = targetQueries.map((query) => ({
+    url: `${baseUrl}/calc/${query}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
 
-  return entries;
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
+    ...dynamicUrls,
+  ];
 }
