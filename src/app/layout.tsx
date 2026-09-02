@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Footer } from "@/components/layout/footer";
 import { MobileTabBar } from "@/components/layout/mobile-tab-bar";
 import { Navbar } from "@/components/layout/navbar";
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script src="https://pl31139608.profitableratecpmnetwork.com/54/a1/85/54a1859f85264dc8a5b1c59424c59681.js"></script>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       </head>
