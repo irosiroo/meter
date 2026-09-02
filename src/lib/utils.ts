@@ -85,5 +85,5 @@ export const SITE = {
   tagline: "Measure. Calculate. Solve.",
   description:
     "309 intelligent calculators and professional tools in one powerful platform. From a scientific calculator to finance, unit conversion, health, engineering and more.",
-  url: "https://meter.tools",
+  url: "https://meteria.vercel.app",
 } as const;
