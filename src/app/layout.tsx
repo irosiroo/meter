@@ -69,7 +69,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
-        <script src="https://pl31139608.profitableratecpmnetwork.com/54/a1/85/54a1859f85264dc8a5b1c59424c59681.js"></script>
+        <Script
+  src="https://pl31139608.profitableratecpmnetwork.com/54/a1/85/54a1859f85264dc8a5b1c59424c59681.js"
+  strategy="afterInteractive"
+/>
       </head>
       <body>
         <Providers>
